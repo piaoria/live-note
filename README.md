@@ -29,7 +29,27 @@
 - 사이드바 상단 버튼: **⏸ 기록 시작/일시정지 · 📋 전체 복사 · ⬇ .md 다운로드 · ⚙ 설정**
 - 확장 아이콘(툴바) 클릭 → 팝업에서 AI 상태 확인 / 자막 숨김 / 추가 종목·키워드 등록.
 
+## 빌드 / 패키징
+
+무빌드 구조라 별도 번들링은 없습니다. 배포 자산만 스크립트로 생성합니다.
+
+```bash
+node scripts/generate-icons.js   # assets/icon16·48·128.png 생성
+node scripts/package.mjs         # dist/live-note-<version>.zip (스토어 업로드용) 생성
+```
+
+## Chrome 웹스토어 등록
+
+등록에 필요한 아이콘·권한 정리·패키징·리스팅 문안·개인정보 처리방침이 모두 준비되어 있습니다.
+
+- 등록 가이드 & 복사용 리스팅 문안: [`docs/STORE.md`](docs/STORE.md)
+- 개인정보 처리방침: [`PRIVACY.md`](PRIVACY.md)
+
+## 패치 내역 (Changelog)
+
+버전별 변경 사항은 [`CHANGELOG.md`](CHANGELOG.md)에서 관리합니다. (최신: **v0.2.0** — UI 리디자인 + 웹스토어 등록 준비)
+
 ## 상태
 
-초기 뼈대 + 파이프라인 구현 완료. 실제 라이브 방송 대상 셀렉터/엔드포인트 안정화(실데이터 튜닝)는 진행 중입니다.
-체크리스트는 [`docs/PROJECT.md` §6](docs/PROJECT.md) 참고.
+파이프라인 구현 + UI 다듬기 + 웹스토어 등록 준비 완료. 남은 것은 실제 라이브 방송 대상 셀렉터/엔드포인트
+안정화(실데이터 튜닝)입니다. 체크리스트는 [`docs/PROJECT.md` §6](docs/PROJECT.md) 참고.
