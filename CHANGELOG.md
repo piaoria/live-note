@@ -8,7 +8,19 @@
 ### 예정
 - 실제 라이브 방송 대상 `timedtext` 포맷 / 플레이어 셀렉터 안정화
 - 한국어 요약 프롬프트 실데이터 튜닝
-- 종목 사전 확장 및 사용자 사전 import/export
+- 사용자 사전 import/export
+
+## [0.3.0] - 2026-06-24
+### Added
+- **파이프라인 상태 안내**: 헤더 아래 상태바 추가. 현재 상태를 색상 점 + 문구로 표시
+  (`자막 대기 중` / `자막 수신 중·종목 언급 대기` / `기록 중·N개` / `AI 준비 중` / `사용 불가` / `일시정지`).
+- **상황별 빈 화면 안내**: AI 미지원·다운로드 중·일시정지·자막 수신 중 등 상태에 맞춰 빈 화면 아이콘/문구가 바뀜.
+- **사전 관리 UI(칩)**: 사이드바 설정과 팝업 모두 textarea → **칩(chip) 추가/삭제** 방식으로 개편.
+  Enter 또는 추가 버튼으로 등록, × 로 삭제, 중복 자동 방지. 기본 내장 사전 규모(종목·키워드 수) 표시.
+- content→사이드바 상태 신호(`setPipeline`)와 AI 상태 주기적 갱신(12초)으로 다운로드 진행률 등을 반영.
+
+### Changed
+- 팝업 키워드 편집을 칩 UI로 교체하고, 추가/삭제 시 자동 저장(별도 저장 버튼 제거).
 
 ## [0.2.0] - 2026-06-24
 ### Added
@@ -34,6 +46,7 @@
 - UI: 우측 사이드바 타임라인(복사 / `.md` 다운로드 / 설정), 설정 팝업.
 - 문서: `docs/PROJECT.md`, `README.md`.
 
-[Unreleased]: https://github.com/piaoria/live-note/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/piaoria/live-note/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/piaoria/live-note/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/piaoria/live-note/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/piaoria/live-note/releases/tag/v0.1.0

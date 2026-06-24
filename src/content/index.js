@@ -93,12 +93,15 @@
 
   function onCaption(text, tStartMs, source, videoTimeSec) {
     if (!state.recording || !state.buffer) return;
+    if (state.sidebar && state.sidebar.pipeline === "idle") {
+      state.sidebar.setPipeline("listening");
+    }
     const vt =
       videoTimeSec != null ? videoTimeSec : LN.captureDom.currentVideoTimeSec();
     state.buffer.add(text, tStartMs, vt);
   }
 
-  async function queryAiStatus() {
+  function queryAiStatus() {
     try {
       chrome.runtime.sendMessage({ type: "AI_STATUS" }, (resp) => {
         if (chrome.runtime.lastError) return;
@@ -172,7 +175,14 @@
     const poll = setInterval(() => {
       if (location.pathname.startsWith("/watch")) handleNavigation();
     }, 3000);
-    window.addEventListener("beforeunload", () => clearInterval(poll));
+    // AI 상태 주기적 갱신(모델 다운로드 진행률 등 반영)
+    const aiPoll = setInterval(() => {
+      if (state.sidebar) queryAiStatus();
+    }, 12000);
+    window.addEventListener("beforeunload", () => {
+      clearInterval(poll);
+      clearInterval(aiPoll);
+    });
 
     // 팝업에서 설정이 바뀌면 즉시 반영
     chrome.storage?.onChanged.addListener((changes, area) => {

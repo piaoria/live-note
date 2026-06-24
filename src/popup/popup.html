@@ -31,11 +31,15 @@
     </section>
 
     <section class="card">
-      <label class="col">
-        <span class="label">추가 종목 / 키워드</span>
-        <textarea id="keywords" rows="4" placeholder="쉼표로 구분. 예: 두산로보틱스, SOXL, 반도체 사이클"></textarea>
-      </label>
-      <button id="save" class="primary">저장</button>
+      <div class="dict-head">
+        <span class="label">내 종목 / 키워드 사전</span>
+        <span id="dict-info" class="muted"></span>
+      </div>
+      <div class="chip-input">
+        <input id="kw-input" type="text" placeholder="종목·키워드 입력 후 Enter" />
+        <button id="kw-add" class="primary sm" type="button">추가</button>
+      </div>
+      <div id="chips" class="chips"></div>
       <span id="saved" class="saved" hidden>저장됨 ✓</span>
     </section>
 
@@ -43,6 +47,7 @@
       <span>온디바이스 처리 · 외부 전송 없음</span>
     </footer>
 
+    <script src="../content/stocks.js"></script>
     <script src="popup.js"></script>
   </body>
 </html>

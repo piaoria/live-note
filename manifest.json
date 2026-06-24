@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "LiveNote — 라이브 자막 타임라인",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "유튜브 라이브 자막을 Chrome 내장 AI(Gemini Nano)로 정제해 [타임스탬프+종목+요약] 타임라인으로 기록합니다.",
   "minimum_chrome_version": "138",
   "homepage_url": "https://github.com/piaoria/live-note",
