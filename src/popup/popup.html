@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="popup.css" />
+    <title>LiveNote 설정</title>
+  </head>
+  <body>
+    <header>
+      <h1>📝 LiveNote</h1>
+      <p class="sub">유튜브 라이브 자막 → 종목 타임라인</p>
+    </header>
+
+    <section class="card">
+      <div class="status-row">
+        <span class="label">내장 AI(Gemini Nano)</span>
+        <span id="ai-status" class="badge">확인 중…</span>
+      </div>
+      <p class="hint">
+        상태가 "다운로드 필요"면 유튜브 영상에서 첫 자막이 정제될 때 모델이 자동 내려받아집니다.
+        "미지원"이면 Chrome 138+ 인지, <code>chrome://flags</code>의 Prompt API 플래그가 켜져 있는지 확인하세요.
+      </p>
+    </section>
+
+    <section class="card">
+      <label class="row">
+        <input type="checkbox" id="hide" />
+        <span>DOM 수집 시 영상의 자막 화면 숨기기</span>
+      </label>
+    </section>
+
+    <section class="card">
+      <label class="col">
+        <span class="label">추가 종목 / 키워드</span>
+        <textarea id="keywords" rows="4" placeholder="쉼표로 구분. 예: 두산로보틱스, SOXL, 반도체 사이클"></textarea>
+      </label>
+      <button id="save" class="primary">저장</button>
+      <span id="saved" class="saved" hidden>저장됨 ✓</span>
+    </section>
+
+    <footer>
+      <span>온디바이스 처리 · 외부 전송 없음</span>
+    </footer>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,141 @@
+/* LiveNote — sidebar.css : 유튜브 라이트/다크 테마 대응 미니멀 사이드바 */
+
+#ln-sidebar {
+  --ln-bg: #ffffff;
+  --ln-fg: #0f0f0f;
+  --ln-sub: #606060;
+  --ln-border: #e5e5e5;
+  --ln-accent: #cc0000;
+  --ln-entry: #f8f8f8;
+
+  font-family: "Roboto", "Noto Sans KR", Arial, sans-serif;
+  background: var(--ln-bg);
+  color: var(--ln-fg);
+  border: 1px solid var(--ln-border);
+  border-radius: 12px;
+  margin: 0 0 16px 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: 70vh;
+}
+
+/* 유튜브 다크 테마 */
+html[dark] #ln-sidebar,
+ytd-app[is-watch-page] #ln-sidebar {
+  --ln-bg: #0f0f0f;
+  --ln-fg: #f1f1f1;
+  --ln-sub: #aaaaaa;
+  --ln-border: #303030;
+  --ln-entry: #1c1c1c;
+}
+
+#ln-sidebar .ln-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--ln-border);
+}
+
+#ln-sidebar .ln-title {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+#ln-sidebar .ln-controls {
+  display: flex;
+  gap: 4px;
+}
+
+#ln-sidebar .ln-btn {
+  background: transparent;
+  border: none;
+  color: var(--ln-fg);
+  font-size: 15px;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 6px;
+  line-height: 1;
+}
+
+#ln-sidebar .ln-btn:hover {
+  background: var(--ln-entry);
+}
+
+#ln-sidebar .ln-btn.ln-paused {
+  color: var(--ln-accent);
+}
+
+#ln-sidebar .ln-settings {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--ln-border);
+  font-size: 12px;
+  color: var(--ln-sub);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#ln-sidebar .ln-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#ln-sidebar .ln-row.ln-col {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+#ln-sidebar textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--ln-entry);
+  color: var(--ln-fg);
+  border: 1px solid var(--ln-border);
+  border-radius: 6px;
+  padding: 6px;
+  font: inherit;
+  resize: vertical;
+}
+
+#ln-sidebar .ln-status {
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+#ln-sidebar .ln-list {
+  overflow-y: auto;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#ln-sidebar .ln-empty {
+  color: var(--ln-sub);
+  font-size: 13px;
+  text-align: center;
+  padding: 24px 8px;
+}
+
+#ln-sidebar .ln-entry {
+  background: var(--ln-entry);
+  border-radius: 8px;
+  padding: 7px 9px;
+  font-size: 13px;
+  line-height: 1.45;
+  word-break: break-word;
+}
+
+#ln-sidebar .ln-time {
+  color: var(--ln-sub);
+  font-size: 11px;
+  margin-right: 4px;
+}
+
+#ln-sidebar .ln-text strong {
+  color: var(--ln-accent);
+  font-weight: 600;
+}
