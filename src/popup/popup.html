@@ -43,6 +43,19 @@
       <span id="saved" class="saved" hidden>저장됨 ✓</span>
     </section>
 
+    <section class="card">
+      <div class="status-row">
+        <span class="label">🎙️ 오디오 STT (PoC)</span>
+        <button id="poc-toggle" class="primary sm" type="button">시작</button>
+      </div>
+      <p class="hint">
+        자막 트랙이 없는 라이브용 실험 기능. 현재 탭의 소리를 잡아 온디바이스 AI로 받아씁니다.
+        Chrome 148+ · GPU(VRAM&gt;4GB) 필요. 결과는 아래와 콘솔에 표시됩니다.
+      </p>
+      <div id="poc-status" class="muted"></div>
+      <div id="poc-log" class="poc-log"></div>
+    </section>
+
     <footer>
       <span>온디바이스 처리 · 외부 전송 없음</span>
     </footer>

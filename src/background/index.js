@@ -7,9 +7,24 @@
  */
 
 import { summarize, getStatus } from "./ai.js";
+import { startAudioPoc, stopAudioPoc } from "./audioPoc.js";
 
 chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
   if (!msg || !msg.type) return;
+
+  if (msg.type === "AUDIO_POC_START") {
+    startAudioPoc(msg.streamId)
+      .then(() => sendResponse({ ok: true }))
+      .catch((e) => sendResponse({ ok: false, error: String(e) }));
+    return true;
+  }
+
+  if (msg.type === "AUDIO_POC_STOP") {
+    stopAudioPoc()
+      .then(() => sendResponse({ ok: true }))
+      .catch((e) => sendResponse({ ok: false, error: String(e) }));
+    return true;
+  }
 
   if (msg.type === "REFINE_CHUNK") {
     summarize(msg.text || "")

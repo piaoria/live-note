@@ -3,9 +3,9 @@
   "name": "LiveNote — 라이브 자막 타임라인",
   "version": "0.3.0",
   "description": "유튜브 라이브 자막을 Chrome 내장 AI(Gemini Nano)로 정제해 [타임스탬프+종목+요약] 타임라인으로 기록합니다.",
-  "minimum_chrome_version": "138",
+  "minimum_chrome_version": "148",
   "homepage_url": "https://github.com/piaoria/live-note",
-  "permissions": ["storage"],
+  "permissions": ["storage", "tabCapture", "offscreen"],
   "host_permissions": ["*://*.youtube.com/*"],
   "icons": {
     "16": "assets/icon16.png",

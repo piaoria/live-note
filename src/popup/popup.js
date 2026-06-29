@@ -87,10 +87,67 @@ function setDictInfo() {
     $("dict-info").textContent = `기본 ${stocks.STOCK_NAMES.length}종목·${stocks.ACTION_KEYWORDS.length}키워드 내장`;
 }
 
+// ---- 오디오 STT PoC ----
+let pocRunning = false;
+
+function setPocStatus(text) {
+  $("poc-status").textContent = text || "";
+}
+
+function appendPocLog(text, ms) {
+  const log = $("poc-log");
+  const line = document.createElement("div");
+  line.className = "poc-line";
+  const t = new Date().toLocaleTimeString("ko-KR");
+  line.textContent = `[${t}] ${text || "(빈 결과)"}${ms ? ` · ${ms}ms` : ""}`;
+  log.prepend(line);
+}
+
+async function startPoc() {
+  // getMediaStreamId 는 사용자 제스처(버튼 클릭) 컨텍스트에서 호출해야 안전.
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  if (!tab) return setPocStatus("활성 탭을 찾지 못했습니다.");
+  let streamId;
+  try {
+    streamId = await chrome.tabCapture.getMediaStreamId({ targetTabId: tab.id });
+  } catch (e) {
+    return setPocStatus("탭 캡처 권한 획득 실패: " + (e?.message || e));
+  }
+  chrome.runtime.sendMessage({ type: "AUDIO_POC_START", streamId }, (resp) => {
+    if (chrome.runtime.lastError || !resp?.ok) {
+      return setPocStatus("시작 실패: " + (resp?.error || chrome.runtime.lastError?.message || ""));
+    }
+    pocRunning = true;
+    $("poc-toggle").textContent = "중지";
+    setPocStatus("캡처 시작 — 청크가 모이면 받아쓰기됩니다…");
+  });
+}
+
+function stopPoc() {
+  chrome.runtime.sendMessage({ type: "AUDIO_POC_STOP" }, () => {
+    pocRunning = false;
+    $("poc-toggle").textContent = "시작";
+    setPocStatus("중지됨");
+  });
+}
+
+// offscreen → 이벤트 수신(popup 이 열려 있을 때만 표시)
+chrome.runtime.onMessage.addListener((msg) => {
+  if (!msg || msg.type !== "AUDIO_POC_EVENT") return;
+  if (msg.kind === "transcript") appendPocLog(msg.text, msg.ms);
+  else if (msg.kind === "status") setPocStatus(msg.status);
+  else if (msg.kind === "error") setPocStatus("오류: " + msg.message);
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   loadSettings();
   refreshStatus();
   setDictInfo();
+
+  $("poc-toggle").addEventListener("click", () => {
+    if (pocRunning) stopPoc();
+    else startPoc();
+  });
 
   $("hide").addEventListener("change", persist);
 

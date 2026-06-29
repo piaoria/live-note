@@ -5,7 +5,15 @@
 버전은 [유의적 버전(SemVer)](https://semver.org/lang/ko/)을 따릅니다.
 
 ## [Unreleased]
+### Added (실험)
+- **오디오 STT PoC**: 자막 트랙이 없는 라이브 대응. 현재 탭의 오디오를 `tabCapture`로 캡처해
+  offscreen 문서에서 Chrome 내장 AI(Gemini Nano 멀티모달 오디오 입력)로 온디바이스 받아쓰기.
+  팝업의 "🎙️ 오디오 STT (PoC)" 버튼으로 시작/중지, 결과는 팝업·콘솔에 표시.
+  요구사항: Chrome 148+, GPU(VRAM>4GB). 품질·지연 실측 후 정식 파이프라인 연결 예정.
+- `minimum_chrome_version` 138 → 148 상향, `tabCapture`·`offscreen` 권한 추가.
+
 ### 예정
+- 오디오 STT 품질 검증 후 기존 청크 파이프라인(종목 필터→정제) 연결 + 자막/오디오 자동 폴백
 - 실제 라이브 방송 대상 `timedtext` 포맷 / 플레이어 셀렉터 안정화
 - 한국어 요약 프롬프트 실데이터 튜닝
 - 사용자 사전 import/export
